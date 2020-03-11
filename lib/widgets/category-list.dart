@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:news_app/utils/strings.dart';
 
 class CategoryList extends StatelessWidget {
+  Function fetchHeadlines;
+  CategoryList({@required this.fetchHeadlines});
+
   @override
   Widget build(BuildContext context) {
     List<String> categories = [
@@ -18,7 +21,9 @@ class CategoryList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: categories
             .map((category) => FlatButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await fetchHeadlines(category: category);
+                  },
                   child: Text(capitalize(category)),
                   padding: EdgeInsets.all(10.0),
                 ))
